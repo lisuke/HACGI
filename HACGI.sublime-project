@@ -1,0 +1,46 @@
+{
+	"build_systems":
+	[
+		{
+			"cmd":
+			[
+				"pip",
+				"install",
+				"-r",
+				"requirements.txt"
+			],
+			"env":
+			{
+				"PYTHONPATH": ".venv/lib/python3.6/site-packages"
+			},
+			"name": "install dependencies",
+			"selector": "source.python"
+		},
+		{
+			"cmd":
+			[
+				"python",
+				"__init__.py"
+			],
+			"env":
+			{
+				"PYTHONPATH": ".venv/lib/python3.6/site-packages"
+			},
+			"name": "Run HACGI",
+			"selector": "source.python"
+		},
+		{
+			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+			"name": "Anaconda Python Builder",
+			"selector": "source.python",
+			"shell_cmd": "\"python\" -u \"$file\""
+		}
+	],
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"virtualenv": "/home/lisuke/Desktop/git/HACGI/.venv"
+}
