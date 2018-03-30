@@ -150,14 +150,23 @@ class ServiceInstance(ServiceInterface, ConfigABC):
         pass
 
     def Stop(self):
-        print("modules stop:" + self.ServiceName)
-        # sm.ServicesDeleter(self.OBJECT_PATH)
-        self.ServiceIsRunning = False
+        if self.ServiceIsRunning:
+            print("modules stop:" + self.ServiceName)
+            self.ServiceIsRunning = False
+            try:
+                sm.ServicesDeleter(self.OBJECT_PATH)
+            except Exception as e:
+                print("sm closed...")
+            else:
+                pass
+            finally:
+                pass
 
     def Start(self):
-        self.ServiceIsRunning = True
-        print("modules start:" + self.ServiceName)
-        sm.ServicesRegister(self.Type, self.BUS_NAME, self.OBJECT_PATH)
+        if self.ServiceIsRunning == False:
+            self.ServiceIsRunning = True
+            print("modules start:" + self.ServiceName)
+            sm.ServicesRegister(self.Type, self.BUS_NAME, self.OBJECT_PATH)
 
     def GetMethod():
         pass
