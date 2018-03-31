@@ -8,44 +8,31 @@ class ServiceInstance(ServiceInterface, ConfigABC):
     """
     <node>
         <interface name='com.HACGI.access.Service'>
-        /*
-            //
+            // DBus information
             <property name='BUS_NAME' type='s' access='readwrite'></property>
             <property name='OBJECT_PATH' type='s' access='readwrite'></property>
-            //
-            <property name='Services' type='a(sa(sso))' access='readwrite' />
-            <method name='ServicesRegister'>
-                <arg type='s' name='s_type' direction='in' />
-                <arg type='s' name='service_bus_name' direction='in' />
-                <arg type='o' name='service_obj_path' direction='in' />
-                <arg type='i' name='services_all_index' direction='out'/>
+            // HACGI meta
+            <property name='Type' type='s' access='readwrite'></property>
+            <property name='ServiceName' type='s' access='readwrite'></property>
+            // access modules meta
+            <property name='ServiceIsRunning' type='b' access='readwrite' />
+            <property name='ServiceAutoStart' type='b' access='readwrite' />
+            <method name='Start'></method>
+            <method name='Stop'></method>
+            // 
+            <method name='HaveInterFace'>
+                <arg type='s' name='InterfaceName' direction='in'/>
+                <arg type='b' name='ret_has_own' direction='out'/>
             </method>
-            <method name='ServicesDeleter'>
-                <arg type='o' name='service_obj' direction='in'/>
+            <method name='ControlInterFace'>
+                <arg type='s' name='InterfaceName' direction='in'/>
+                <arg type='s' name='arg_JSON_Value' direction='in'/>
+                <arg type='s' name='ret_JSON_Value' direction='out'/>
             </method>
-            <method name='GetServiceByIndex'>
-                <arg type='i' name='service_obj' direction='in'/>
-                <arg type='(sso)' name='service_obj' direction='out'/>
-            </method>
-            <method name='GetServiceByType'>
-                <arg type='s' name='service_obj' direction='in'/>
-                <arg type='(sso)' name='service_obj' direction='out'/>
-            </method>
-            <signal name="ServicesChanged">
-                <arg type="s" name="service_type" />
-                <arg type="s" name="bus_name" />
-                <arg type="o" name="obj_path" />
-                <arg type="s" name="change_type" />
-                <arg type="b" name="new_s_type" />
-            </signal>
-            //
-            <method name='Quit' />
-            <signal name="sm_quit_signal" />
-            <signal name="sm_start_signal" />
-            */
         </interface>
     </node>
     """
+
     @property
     def config_file_path(self):
         return os.path.split(os.path.realpath(__file__))[0] + '/service.conf'
@@ -168,8 +155,8 @@ class ServiceInstance(ServiceInterface, ConfigABC):
             print("modules start:" + self.ServiceName)
             sm.ServicesRegister(self.Type, self.BUS_NAME, self.OBJECT_PATH)
 
-    def GetMethod(self):
+    def HoldInterFace(self, InterfaceName, ret_has_own):
         pass
 
-    def CallMethod(self):
+    def ControlInterFace(self, InterfaceName, arg_JSON_Value):
         pass
