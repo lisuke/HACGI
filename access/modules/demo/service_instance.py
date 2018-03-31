@@ -168,8 +168,8 @@ class ServiceInstance(ServiceInterface, ConfigABC):
             print("modules start:" + self.ServiceName)
             sm.ServicesRegister(self.Type, self.BUS_NAME, self.OBJECT_PATH)
 
-    def GetMethod():
+    def GetMethod(self):
         pass
 
-    def CallMethod():
+    def CallMethod(self):
         pass
