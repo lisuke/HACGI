@@ -37,11 +37,11 @@ class ServiceInterface(metaclass=ABCMeta):
 #
 
     @abstractmethod
-    def GetMethod():
+    def ControlInterFace():
         pass
 
     @abstractmethod
-    def CallMethod():
+    def HoldInterFace():
         pass
 
     @abstractmethod
