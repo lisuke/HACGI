@@ -17,8 +17,11 @@ class ServiceInstance(ServiceABC):
     def Init(self):
         pass
 
-    def HoldInterFace(self, InterfaceName, ret_has_own):
+    def RegisterInterface(self, InterfaceName):
         pass
 
-    def ControlInterFace(self, InterfaceName, arg_JSON_Value):
+    def HoldInterface(self, InterfaceName, ret_has_own):
+        pass
+
+    def ControlInterface(self, InterfaceName, arg_JSON_Value):
         pass

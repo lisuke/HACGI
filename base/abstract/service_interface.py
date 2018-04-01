@@ -34,15 +34,7 @@ class ServiceInterface(metaclass=ABCMeta):
     def ServiceAutoStart():
         pass
 
-#
-
-    @abstractmethod
-    def ControlInterFace():
-        pass
-
-    @abstractmethod
-    def HoldInterFace():
-        pass
+    #
 
     @abstractmethod
     def Init():
