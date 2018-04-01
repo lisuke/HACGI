@@ -1,10 +1,11 @@
+from base.abstract.service_type_interface import ServiceTypeInterface
 from base.abstract.service_interface import ServiceInterface
 from base.utils.configabc import ConfigABC
 from access.dbus import sm
 import os
 
 
-class ServiceABC(ServiceInterface, ConfigABC):
+class ServiceABC(ServiceInterface, ServiceTypeInterface, ConfigABC):
 
     @property
     def dbus():
