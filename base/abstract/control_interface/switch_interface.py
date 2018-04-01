@@ -1,7 +1,8 @@
 from abc import ABCMeta, abstractmethod, abstractproperty
+from base.abstract.service_type_interface import ControlInterface
 
 
-class SwitchInterface(object):
+class SwitchInterface(ControlInterface):
     """docstring for SwitchInterface"""
 
     @abstractmethod
