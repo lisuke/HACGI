@@ -3,12 +3,16 @@ import signal
 from access.dbus import sm
 import importlib
 from base.abstract.service_interface import ServiceInterface
+from base.abstract.control_interface import auto_search_AllControlInterfaces
 import importlib
 
 MS = []
 
 
 def modules_action_on_sm_start():
+    print("ci loading")
+    auto_search_AllControlInterfaces()
+    print("ci loaded")
     print("sm start")
     if len(MS) == 0:
         auto_search_modules()
