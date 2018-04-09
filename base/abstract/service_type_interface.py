@@ -38,6 +38,7 @@ class ServiceTypeInterface(metaclass=ABCMeta):
 
     def __init__(self):
         self.interfaces = {}
+        self.TypeName = 'unknown'
 
     def RegisterInterface(self, InterfaceName, Interface, holder, **cbs):
         if isinstance(Interface, ControlInterface):
