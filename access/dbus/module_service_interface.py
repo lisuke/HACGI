@@ -1,11 +1,11 @@
-from base.abstract.service_type_interface import ServiceTypeInterface
+from base.abstract.service_type_interface import ServiceTypeController
 from base.abstract.service_interface import ServiceInterface
 from base.utils.configabc import ConfigABC
 from access.dbus import sm
 import os
 
 
-class ServiceABC(ServiceInterface, ServiceTypeInterface, ConfigABC):
+class ServiceABC(ServiceInterface, ServiceTypeController, ConfigABC):
 
     @property
     def dbus():
@@ -24,14 +24,17 @@ class ServiceABC(ServiceInterface, ServiceTypeInterface, ConfigABC):
             <method name='Start'></method>
             <method name='Stop'></method>
             // 
-            <method name='HaveInterFace'>
+            <method name='HasHoldInterface'>
                 <arg type='s' name='InterfaceName' direction='in'/>
                 <arg type='b' name='ret_has_own' direction='out'/>
             </method>
-            <method name='ControlInterFace'>
+            <method name='CallControlInterface'>
                 <arg type='s' name='InterfaceName' direction='in'/>
                 <arg type='s' name='arg_JSON_Value' direction='in'/>
                 <arg type='s' name='ret_JSON_Value' direction='out'/>
+            </method>
+            <method name='getAllInterfaces'>
+                <arg type='as' name='allInterfaces' direction='out'/>
             </method>
         </interface>
     </node>
