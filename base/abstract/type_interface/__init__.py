@@ -1,6 +1,6 @@
 from base.abstract.service_type_interface import ServiceTypeInterface
 
-CT_ABC = []
+CT_ABC = {}
 
 
 def auto_search_AllControlTypeInterfaces():
@@ -16,7 +16,7 @@ def auto_search_AllControlTypeInterfaces():
             ct_abc_cls = getattr(c_lib, 'ControlTypeABC', None)
             if ct_abc_cls != None:
                 if issubclass(ct_abc_cls, ServiceTypeInterface):
-                    CT_ABC.append((ct_name, ct_abc_cls))
+                    CT_ABC[ct_name] = ct_abc_cls
                     print('ControlTypeABC_find::success: ' + ct_name)
                 else:
                     print(
