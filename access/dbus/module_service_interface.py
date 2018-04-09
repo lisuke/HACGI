@@ -1,5 +1,6 @@
 from base.abstract.service_type_interface import ServiceTypeController
 from base.abstract.service_interface import ServiceInterface
+from base.abstract.type_interface import CT_ABC
 from base.utils.configabc import ConfigABC
 from access.dbus import sm
 import os
@@ -133,7 +134,9 @@ class ServiceABC(ServiceInterface, ServiceTypeController, ConfigABC):
     # #############################
 
     def Init(self):
-        pass
+        if hasattr(CT_ABC, self.Type):
+            type_cls = CT_ABC[self.Type]
+            self.TypeInterface = type_cls()
 
     def Stop(self):
         if self.ServiceIsRunning:
