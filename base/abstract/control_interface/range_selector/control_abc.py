@@ -43,6 +43,3 @@ class ControlABC(ControlInterface):
     def __decrement__(self):
         self.current_value = self.current_value - 1
         self.valueChanged(self.current_value)
-
-    def valueChanged(self, current_value):
-        return self.InvokeMethod("valueChanged")(current_value)
