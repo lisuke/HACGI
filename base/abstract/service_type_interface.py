@@ -46,6 +46,13 @@ class ServiceTypeInterface(metaclass=ABCMeta):
     def getAllInterfaces(self):
         return list(self.interfaces.keys())
 
+    def RegisterMethodToInterface(self, InterfaceName, MethodName, MethodCallback):
+        if InterfaceName not in self.interfaces.keys():
+            raise ControlMethodNotFoundException(
+                "%s was Not Found. You must invoke the RegisterInterface function" % InterfaceName)
+        iface = self.interfaces[InterfaceName]
+        iface.RegisterMethod(MethodName, MethodCallback)
+
     @abstractmethod
     def HasHoldInterface(self, InterfaceName, ret_has_own):
         pass
