@@ -10,7 +10,7 @@ def off():
     pass
 
 
-def valueChanged():
+def valueChanged(value):
     pass
 
 
