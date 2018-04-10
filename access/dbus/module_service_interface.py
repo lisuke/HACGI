@@ -38,6 +38,10 @@ class ServiceABC(ServiceInterface, ServiceTypeController, ConfigABC):
             <method name='getAllInterfaces'>
                 <arg type='as' name='allInterfaces' direction='out'/>
             </method>
+            <method name='getAllMethodNamesFromInterface'>
+                <arg type='s' name='InterfaceName' direction='in'/>
+                <arg type='as' name='allInterfaces' direction='out'/>
+            </method>
         </interface>
     </node>
     """.format(self.BUS_NAME, self.ServiceName)

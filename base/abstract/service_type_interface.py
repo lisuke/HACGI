@@ -57,7 +57,7 @@ class ServiceTypeInterface(metaclass=ABCMeta):
     def HasHoldInterface(self, InterfaceName):
         return InterfaceName in self.interfaces.keys()
 
-    def getMethodsFromInterface(self, InterfaceName):
+    def getAllMethodNamesFromInterface(self, InterfaceName):
         return self.interfaces[InterfaceName].getAllMethods()
 
     def CallControlInterface(self, InterfaceName, MethodName, arg_JSON_Value):
