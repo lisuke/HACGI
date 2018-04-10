@@ -40,7 +40,7 @@ class ServiceTypeInterface(metaclass=ABCMeta):
         self.interfaces = {}
         self.TypeName = 'unknown'
 
-    def RegisterInterface(self, InterfaceName, Interface, holder, **cbs):
+    def RegisterInterface(self, InterfaceName, Interface):
         if isinstance(Interface, ControlInterface):
             self.interfaces[InterfaceName] = Interface
 
@@ -54,11 +54,9 @@ class ServiceTypeInterface(metaclass=ABCMeta):
         iface = self.interfaces[InterfaceName]
         iface.RegisterMethod(MethodName, MethodCallback)
 
-    @abstractmethod
-    def HasHoldInterface(self, InterfaceName, ret_has_own):
-        pass
+    def HasHoldInterface(self, InterfaceName):
+        return InterfaceName in self.interfaces.keys()
 
-    @abstractmethod
     def CallControlInterface(self, InterfaceName, arg_JSON_Value):
         pass
 
@@ -82,8 +80,8 @@ class ServiceTypeController(object):
             raise Exception(
                 "setTypeInterface arg must be ServiceTypeInterface")
 
-    def HasHoldInterface(self, InterfaceName, ret_has_own):
-        return self.TypeInterface.HasHoldInterface(InterfaceName, ret_has_own)
+    def HasHoldInterface(self, InterfaceName):
+        return self.TypeInterface.HasHoldInterface(InterfaceName)
 
     def CallControlInterface(self, InterfaceName, arg_JSON_Value):
         return self.TypeInterface.CallControlInterface(InterfaceName, arg_JSON_Value)
