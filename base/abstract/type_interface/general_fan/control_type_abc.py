@@ -11,7 +11,7 @@ class ControlTypeABC(ServiceTypeInterface):
         super(ControlTypeABC, self).__init__(*args, **kwargs)
 
         self.switch_abc = SwitchABC()
-        self.RegisterInterface('switch_abc', self.switch_abc)
+        self.RegisterInterface('switch_interface', self.switch_abc)
 
         self.range_abc = RangeSelectorABC()
-        self.RegisterInterface('range_abc', self.range_abc)
+        self.RegisterInterface('range_selector', self.range_abc)
