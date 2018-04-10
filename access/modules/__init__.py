@@ -21,10 +21,10 @@ def modules_action_on_sm_start():
         if mo.ServiceAutoStart:
             mo.ServiceName = mn
             mo.Init()
-            mo.Start()
             from gi.repository import Gio
             # print(type(mo).dbus) # pydbus's a bug, used (,, mo.dbus)
             session_bus.publish(mo.BUS_NAME, (mo.OBJECT_PATH, mo, mo.dbus))
+            mo.Start()
 
 
 def modules_action_on_sm_stop():
