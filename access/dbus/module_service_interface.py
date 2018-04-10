@@ -24,7 +24,7 @@ class ServiceABC(ServiceInterface, ServiceTypeController, ConfigABC):
             <property name='ServiceAutoStart' type='b' access='readwrite' />
             <method name='Start'></method>
             <method name='Stop'></method>
-            // 
+            //
             <method name='HasHoldInterface'>
                 <arg type='s' name='InterfaceName' direction='in'/>
                 <arg type='b' name='ret_has_own' direction='out'/>
@@ -134,7 +134,7 @@ class ServiceABC(ServiceInterface, ServiceTypeController, ConfigABC):
     # #############################
 
     def Init(self):
-        if hasattr(CT_ABC, self.Type):
+        if self.Type in CT_ABC:
             type_cls = CT_ABC[self.Type]
             self.TypeInterface = type_cls()
 
