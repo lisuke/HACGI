@@ -3,15 +3,15 @@ import os
 
 
 def on():
-    pass
+    print("press on")
 
 
 def off():
-    pass
+    print("press off")
 
 
 def valueChanged(value):
-    pass
+    print("valueChanged, current value is {}.".format(value))
 
 
 class ServiceInstance(ServiceABC):
@@ -28,10 +28,9 @@ class ServiceInstance(ServiceABC):
 
     def Init(self):
         super(ServiceInstance, self).Init()
-        self.TypeInterface.RegisterMethodToInterface(
+        self.RegisterMethodToInterface(
             "switch_interface", "on", on)
-        self.TypeInterface.RegisterMethodToInterface(
+        self.RegisterMethodToInterface(
             "switch_interface", "off", off)
-
-        self.TypeInterface.RegisterMethodToInterface(
+        self.RegisterMethodToInterface(
             "range_selector", "valueChanged", valueChanged)
