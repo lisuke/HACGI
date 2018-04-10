@@ -40,7 +40,7 @@ class ServiceABC(ServiceInterface, ServiceTypeController, ConfigABC):
             </method>
             <method name='getAllMethodNamesFromInterface'>
                 <arg type='s' name='InterfaceName' direction='in'/>
-                <arg type='as' name='allInterfaces' direction='out'/>
+                <arg type='as' name='MethodNames' direction='out'/>
             </method>
         </interface>
     </node>

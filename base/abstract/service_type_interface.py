@@ -97,3 +97,6 @@ class ServiceTypeController(object):
 
     def getAllInterfaces(self):
         return self.TypeInterface.getAllInterfaces()
+
+    def getAllMethodNamesFromInterface(self, InterfaceName):
+        return self.TypeInterface.interfaces[InterfaceName].getAllMethods()
