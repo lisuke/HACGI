@@ -15,13 +15,4 @@ class ServiceInstance(ServiceABC):
     # #############################
 
     def Init(self):
-        pass
-
-    def RegisterInterface(self, InterfaceName):
-        pass
-
-    def HoldInterface(self, InterfaceName, ret_has_own):
-        pass
-
-    def ControlInterface(self, InterfaceName, arg_JSON_Value):
-        pass
+        super(ServiceInstance, self).Init()

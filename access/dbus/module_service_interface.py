@@ -9,7 +9,7 @@ import os
 class ServiceABC(ServiceInterface, ServiceTypeController, ConfigABC):
 
     @property
-    def dbus():
+    def dbus(self):
         return """
     <node>
         <interface name='{}.{}'>
@@ -39,7 +39,7 @@ class ServiceABC(ServiceInterface, ServiceTypeController, ConfigABC):
             </method>
         </interface>
     </node>
-    """.format(self.BUS_NAME)
+    """.format(self.BUS_NAME, self.ServiceName)
 
     # dbus bus_name, unique.
     @property
@@ -63,7 +63,7 @@ class ServiceABC(ServiceInterface, ServiceTypeController, ConfigABC):
             return getattr(self, 'object_path')
         else:
             self.object_path = self.getKeyFromConfig(
-                'OBJECT_PATH', str, "/com/HACGI/access/Service")
+                'OBJECT_PATH', str, "/com/HACGI/access/Service/{}".format(self.ServiceName))
             return self.object_path
 
     @OBJECT_PATH.setter

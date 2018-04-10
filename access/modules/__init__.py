@@ -1,6 +1,6 @@
 from access import loop
 import signal
-from access.dbus import sm
+from access.dbus import sm, session_bus
 import importlib
 from base.abstract.service_interface import ServiceInterface
 from base.abstract.type_interface import auto_search_AllControlTypeInterfaces
@@ -22,6 +22,9 @@ def modules_action_on_sm_start():
             mo.ServiceName = mn
             mo.Init()
             mo.Start()
+            from gi.repository import Gio
+            # print(type(mo).dbus) # pydbus's a bug, used (,, mo.dbus)
+            session_bus.publish(mo.BUS_NAME, (mo.OBJECT_PATH, mo, mo.dbus))
 
 
 def modules_action_on_sm_stop():
