@@ -57,8 +57,14 @@ class ServiceTypeInterface(metaclass=ABCMeta):
     def HasHoldInterface(self, InterfaceName):
         return InterfaceName in self.interfaces.keys()
 
-    def CallControlInterface(self, InterfaceName, arg_JSON_Value):
-        pass
+    def CallControlInterface(self, InterfaceName, MethodName, arg_JSON_Value):
+        import json
+        arg_obj = json.loads(arg_JSON_Value)
+        args = arg_obj.args
+        kwargs = arg_obj.kwargs
+        ret_obj = self.interfaces[InterfaceName].InvokeMethods(
+            json.loads, *args, **kwargs)
+        return json.dumps(ret_obj)
 
 
 class ServiceTypeController(object):
