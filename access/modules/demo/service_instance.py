@@ -2,6 +2,18 @@ from access.dbus.module_service_interface import ServiceABC
 import os
 
 
+def on():
+    pass
+
+
+def off():
+    pass
+
+
+def valueChanged():
+    pass
+
+
 class ServiceInstance(ServiceABC):
 
     @property
@@ -16,3 +28,10 @@ class ServiceInstance(ServiceABC):
 
     def Init(self):
         super(ServiceInstance, self).Init()
+        self.TypeInterface.RegisterMethodToInterface(
+            "switch_interface", "on", on)
+        self.TypeInterface.RegisterMethodToInterface(
+            "switch_interface", "off", off)
+
+        self.TypeInterface.RegisterMethodToInterface(
+            "range_selector", "valueChanged", valueChanged)
