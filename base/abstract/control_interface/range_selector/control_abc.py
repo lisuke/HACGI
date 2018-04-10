@@ -15,12 +15,12 @@ class ControlABC(ControlInterface):
         self.DeclareMethod("dec")
         self.DeclareMethod("valueChanged")
 
-        self.RegisterMethod("setRange", setRange)
-        self.RegisterMethod("getRange", getRange)
-        self.RegisterMethod("setValue", setValue)
-        self.RegisterMethod("getValue", getValue)
-        self.RegisterMethod("inc", __increment__)
-        self.RegisterMethod("dec", __decrement__)
+        self.RegisterMethod("setRange", self.setRange)
+        self.RegisterMethod("getRange", self.getRange)
+        self.RegisterMethod("setValue", self.setValue)
+        self.RegisterMethod("getValue", self.getValue)
+        self.RegisterMethod("inc", self.__increment__)
+        self.RegisterMethod("dec", self.__decrement__)
 
     def setRange(self, value_range):
         self.min_value = value_range[0]
