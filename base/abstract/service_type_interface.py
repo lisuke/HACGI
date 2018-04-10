@@ -63,10 +63,12 @@ class ServiceTypeInterface(metaclass=ABCMeta):
     def CallControlInterface(self, InterfaceName, MethodName, arg_JSON_Value):
         import json
         arg_obj = json.loads(arg_JSON_Value)
-        args = arg_obj.args
-        kwargs = arg_obj.kwargs
+        args = arg_obj['args']
+        kwargs = arg_obj['kwargs']
+        args = tuple(args)
+
         ret_obj = self.interfaces[InterfaceName].InvokeMethods(
-            json.loads, *args, **kwargs)
+            MethodName, *args, **kwargs)
         return json.dumps(ret_obj)
 
 
@@ -100,3 +102,6 @@ class ServiceTypeController(object):
 
     def getAllMethodNamesFromInterface(self, InterfaceName):
         return self.TypeInterface.interfaces[InterfaceName].getAllMethods()
+
+    def RegisterMethodToInterface(self, InterfaceName, MethodName, MethodCallback):
+        return self.TypeInterface.RegisterMethodToInterface(InterfaceName, MethodName, MethodCallback)
