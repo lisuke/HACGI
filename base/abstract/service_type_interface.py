@@ -92,8 +92,8 @@ class ServiceTypeController(object):
     def HasHoldInterface(self, InterfaceName):
         return self.TypeInterface.HasHoldInterface(InterfaceName)
 
-    def CallControlInterface(self, InterfaceName, arg_JSON_Value):
-        return self.TypeInterface.CallControlInterface(InterfaceName, arg_JSON_Value)
+    def CallControlInterface(self, InterfaceName, MethodName, arg_JSON_Value):
+        return self.TypeInterface.CallControlInterface(InterfaceName, MethodName, arg_JSON_Value)
 
     def getAllInterfaces(self):
         return self.TypeInterface.getAllInterfaces()
