@@ -1,13 +1,18 @@
 from access.dbus.module_service_interface import ServiceABC
 import os
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(35, GPIO.OUT)
 
 
 def on():
     print("press on")
+    GPIO.output(35, 1)
 
 
 def off():
     print("press off")
+    GPIO.output(35, 0)
 
 
 def valueChanged(value):
