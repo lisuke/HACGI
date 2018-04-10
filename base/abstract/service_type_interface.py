@@ -20,10 +20,10 @@ class ControlInterface(object):
         self.__cbs__[MethodName] = None
 
     def RegisterMethod(self, MethodName, cb):
-        if hasattr(__cbs__, MethodName):
+        if hasattr(self.__cbs__, MethodName):
             raise ControlMethodNotFoundException(
                 "%s was Not Found. You must invoke the DeclareMethod function" % MethodName)
-        elif getattr(__cbs__, MethodName, None) is None:
+        elif getattr(self.__cbs__, MethodName, None) is None:
             self.__cbs__[MethodName] = cb
 
     def getAllMethods(self):
