@@ -31,6 +31,7 @@ class ServiceABC(ServiceInterface, ServiceTypeController, ConfigABC):
             </method>
             <method name='CallControlInterface'>
                 <arg type='s' name='InterfaceName' direction='in'/>
+                <arg type='s' name='MethodName' direction='in'/>
                 <arg type='s' name='arg_JSON_Value' direction='in'/>
                 <arg type='s' name='ret_JSON_Value' direction='out'/>
             </method>
