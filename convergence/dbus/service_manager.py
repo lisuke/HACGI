@@ -2,6 +2,7 @@
 from base.abstract.manager_interface import ServiceManagerInterface
 from pydbus.generic import signal
 from base.global_config import SM__BUS_NAME, SM__OBJECT_PATH
+import json
 
 
 class ServiceManager(ServiceManagerInterface):
@@ -13,6 +14,7 @@ class ServiceManager(ServiceManagerInterface):
             <property name='OBJECT_PATH' type='s' access='readwrite'></property>
             //
             <property name='Services' type='a(sa(sso))' access='readwrite' />
+            <property name='ServicesJSON' type='s' access='readwrite' />
             <method name='ServicesRegister'>
                 <arg type='s' name='s_type' direction='in' />
                 <arg type='s' name='service_bus_name' direction='in' />
@@ -50,6 +52,10 @@ class ServiceManager(ServiceManagerInterface):
 
     Services = [("all", [])]
     ServicesChanged = signal()
+
+    @property
+    def ServicesJSON(self):
+        return json.dumps(self.Services)
 
     def ServicesRegister(self, s_type, service_bus_name, service_obj_path):
         c_st = False
