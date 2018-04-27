@@ -2,6 +2,40 @@ from abc import ABCMeta, abstractmethod, abstractproperty
 from base.abstract.service_type_interface import ControlInterface
 
 
+def __toJson__(iface):
+    value = iface.__cbs__["getValue"](iface)
+    print(value)
+    return {"value": value}
+
+
+def setRange(iface, value_range):
+    iface.min_value = value_range[0]
+    iface.max_value = value_range[1]
+
+
+def getRange(iface):
+    return (min_value, max_value)
+
+
+def setValue(iface, value):
+    iface.current_value = value
+    iface.valueChanged(iface.current_value)
+
+
+def getValue(iface):
+    return iface.current_value
+
+
+def __increment__(iface):
+    iface.current_value = iface.current_value + 1
+    iface.valueChanged(iface.current_value)
+
+
+def __decrement__(iface):
+    iface.current_value = iface.current_value - 1
+    iface.valueChanged(iface.current_value)
+
+
 class ControlABC(ControlInterface):
     """docstring for ControlABC"""
 
@@ -15,31 +49,17 @@ class ControlABC(ControlInterface):
         self.DeclareMethod("dec")
         self.DeclareMethod("valueChanged")
 
-        self.RegisterMethod("setRange", self.setRange)
-        self.RegisterMethod("getRange", self.getRange)
-        self.RegisterMethod("setValue", self.setValue)
-        self.RegisterMethod("getValue", self.getValue)
-        self.RegisterMethod("inc", self.__increment__)
-        self.RegisterMethod("dec", self.__decrement__)
+        self.RegisterMethod("setRange", setRange)
+        self.RegisterMethod("getRange", getRange)
+        self.RegisterMethod("setValue", setValue)
+        self.RegisterMethod("getValue", getValue)
+        self.RegisterMethod("inc", __increment__)
+        self.RegisterMethod("dec", __decrement__)
+        self.RegisterMethod("__toJson__", __toJson__)
 
-    def setRange(self, value_range):
-        self.min_value = value_range[0]
-        self.max_value = value_range[1]
+        self.min_value = 0
+        self.max_value = 100
+        self.current_value = 50
 
-    def getRange(self):
-        return (min_value, max_value)
-
-    def setValue(self, value):
-        self.current_value = value
-        self.valueChanged(self.current_value)
-
-    def getValue(self):
-        return self.current_value
-
-    def __increment__(self):
-        self.current_value = self.current_value + 1
-        self.valueChanged(self.current_value)
-
-    def __decrement__(self):
-        self.current_value = self.current_value - 1
-        self.valueChanged(self.current_value)
+    def valueChanged(self, value):
+        self.__cbs__["valueChanged"](self, value)

@@ -5,9 +5,9 @@ from base.abstract.service_type_interface import ControlInterface
 def __toJson__(iface):
     ret = ""
     if iface.is_on:
-        ret = '{"is_on":True}'
+        ret = {"is_on": True}
     else:
-        ret = '{"is_on":False}'
+        ret = {"is_on": False}
     return ret
 
 
