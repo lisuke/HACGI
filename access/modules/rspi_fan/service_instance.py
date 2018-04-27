@@ -1,21 +1,17 @@
 from access.dbus.module_service_interface import ServiceABC
 import os
 
-import RPi.GPIO as GPIO
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(35, GPIO.OUT)
-
 
 def on(iface):
     iface.is_on = True
     print("press on")
-    GPIO.output(35, 1)
+    self.GPIO.output(35, 1)
 
 
 def off(iface):
     iface.is_on = False
     print("press off")
-    GPIO.output(35, 0)
+    self.GPIO.output(35, 0)
 
 
 def valueChanged(iface, value):
@@ -42,3 +38,9 @@ class ServiceInstance(ServiceABC):
             "switch_interface", "off", off)
         self.RegisterMethodToInterface(
             "range_selector", "valueChanged", valueChanged)
+
+        import RPi.GPIO as GPIO
+        self.GPIO = GPIO
+
+        self.GPIO.setmode(GPIO.BOARD)
+        self.GPIO.setup(35, GPIO.OUT)
