@@ -15,6 +15,7 @@ class ControlInterface(object):
     def __init__(self, *args, **kwargs):
         super(ControlInterface, self).__init__(*args, **kwargs)
         self.__cbs__ = dict()
+        self.DeclareMethod("__toJson__")
 
     def DeclareMethod(self, MethodName):
         self.__cbs__[MethodName] = None
@@ -30,7 +31,11 @@ class ControlInterface(object):
         return list(self.__cbs__.keys())
 
     def InvokeMethods(self, MethodName, *args, **kwargs):
-        return self.__cbs__[MethodName](*args, **kwargs)
+        callback = self.__cbs__[MethodName]
+        ret = callback(self, *args, **kwargs)
+        ret = self.__cbs__["__toJson__"](self)
+        print(ret)
+        return ret
 
 
 class ServiceTypeInterface(metaclass=ABCMeta):
@@ -66,9 +71,8 @@ class ServiceTypeInterface(metaclass=ABCMeta):
         args = arg_obj['args']
         kwargs = arg_obj['kwargs']
         args = tuple(args)
-
-        ret_obj = self.interfaces[InterfaceName].InvokeMethods(
-            MethodName, *args, **kwargs)
+        iface = self.interfaces[InterfaceName]
+        ret_obj = iface.InvokeMethods(MethodName, *args, **kwargs)
         return json.dumps(ret_obj)
 
 
