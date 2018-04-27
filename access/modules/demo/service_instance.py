@@ -1,21 +1,23 @@
 from access.dbus.module_service_interface import ServiceABC
 import os
-import RPi.GPIO as GPIO
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(35, GPIO.OUT)
+# import RPi.GPIO as GPIO
+# GPIO.setmode(GPIO.BOARD)
+# GPIO.setup(35, GPIO.OUT)
 
 
-def on():
+def on(iface):
+    iface.is_on = True
     print("press on")
-    GPIO.output(35, 1)
+    # GPIO.output(35, 1)
 
 
-def off():
+def off(iface):
+    iface.is_on = False
     print("press off")
-    GPIO.output(35, 0)
+    # GPIO.output(35, 0)
 
 
-def valueChanged(value):
+def valueChanged(iface, value):
     print("valueChanged, current value is {}.".format(value))
 
 
