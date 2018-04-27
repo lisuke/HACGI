@@ -1,4 +1,4 @@
-# from convergence import loop
+from convergence import loop
 from base.abstract.manager_interface import ServiceManagerInterface
 from pydbus.generic import signal
 from base.global_config import SM__BUS_NAME, SM__OBJECT_PATH
