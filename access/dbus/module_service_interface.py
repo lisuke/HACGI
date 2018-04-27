@@ -12,7 +12,7 @@ class ServiceABC(ServiceInterface, ServiceTypeController, ConfigABC):
     def dbus(self):
         return """
     <node>
-        <interface name='{}.{}'>
+        <interface name='{}'>
             // DBus information
             <property name='BUS_NAME' type='s' access='readwrite'></property>
             <property name='OBJECT_PATH' type='s' access='readwrite'></property>
@@ -44,7 +44,7 @@ class ServiceABC(ServiceInterface, ServiceTypeController, ConfigABC):
             </method>
         </interface>
     </node>
-    """.format(self.BUS_NAME, self.ServiceName)
+    """.format(self.BUS_NAME)
 
     # dbus bus_name, unique.
     @property
