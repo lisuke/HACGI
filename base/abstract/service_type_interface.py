@@ -33,9 +33,10 @@ class ControlInterface(object):
     def InvokeMethods(self, MethodName, *args, **kwargs):
         callback = self.__cbs__[MethodName]
         ret = callback(self, *args, **kwargs)
-        ret = self.__cbs__["__toJson__"](self)
-        print(ret)
-        return ret
+        return self.toJson()
+
+    def toJson(self):
+        return self.__cbs__["__toJson__"](self)
 
 
 class ServiceTypeInterface(metaclass=ABCMeta):
@@ -75,6 +76,14 @@ class ServiceTypeInterface(metaclass=ABCMeta):
         ret_obj = iface.InvokeMethods(MethodName, *args, **kwargs)
         return json.dumps(ret_obj)
 
+    def getStatus(self):
+        ret = []
+        for iface in list(self.interfaces.keys()):
+            print(iface)
+            ret.append(self.interfaces[iface].toJson())
+            print(ret)
+        return ret
+
 
 class ServiceTypeController(object):
     """docstring for ServiceTypeController"""
@@ -109,3 +118,7 @@ class ServiceTypeController(object):
 
     def RegisterMethodToInterface(self, InterfaceName, MethodName, MethodCallback):
         return self.TypeInterface.RegisterMethodToInterface(InterfaceName, MethodName, MethodCallback)
+
+    def getStatus(self):
+        import json
+        return json.dumps(self.TypeInterface.getStatus())

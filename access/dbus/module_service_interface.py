@@ -42,6 +42,9 @@ class ServiceABC(ServiceInterface, ServiceTypeController, ConfigABC):
                 <arg type='s' name='InterfaceName' direction='in'/>
                 <arg type='as' name='MethodNames' direction='out'/>
             </method>
+            <method name='getStatus'>
+                <arg type='s' name='status' direction='out'/>
+            </method>
         </interface>
     </node>
     """.format(self.BUS_NAME)
