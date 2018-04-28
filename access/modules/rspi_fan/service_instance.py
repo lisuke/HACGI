@@ -1,27 +1,31 @@
 from access.dbus.module_service_interface import ServiceABC
 import os
 
-is_on = False
+current_value = 50
+is_on = True
 
 def on(iface):
     iface.is_on = True
     print("press on")
-    iface.GPIO.output(18, 1)
+    global is_on
     is_on = True
+    iface.p.start(current_value)
 
 
 def off(iface):
     iface.is_on = False
     print("press off")
-    iface.GPIO.output(18, 0)
-    iface.p.stop()
+    global is_on
     is_on = False
+    iface.p.stop()
 
 
 def valueChanged(iface, value):
+    current_value = value
+    global is_on
     if is_on == True:
         iface.p.start(value)
-        print("valueChanged, current value is {}.".format(value))
+    print("valueChanged, current value is {}.".format(value))
 
 
 class ServiceInstance(ServiceABC):
