@@ -5,13 +5,13 @@ import os
 def on(iface):
     iface.is_on = True
     print("press on")
-    self.GPIO.output(35, 1)
+    iface.GPIO.output(35, 1)
 
 
 def off(iface):
     iface.is_on = False
     print("press off")
-    self.GPIO.output(35, 0)
+    iface.GPIO.output(35, 0)
 
 
 def valueChanged(iface, value):
